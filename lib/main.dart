@@ -53,6 +53,9 @@ class _GamePageState extends State<GamePage> {
             TextButton(
               onPressed: () {
                 _showAlert(context);
+                setState(() {
+                  _model.totalScore += _pointsForCurrentRound();
+                });
               },
               child: const Text(
                 'Hit Me',
@@ -69,12 +72,16 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
+  int _pointsForCurrentRound() {
+    const int maximumScore = 100;
+    return maximumScore - (_model.target - _model.current).abs();
+  }
+
   void _showAlert(BuildContext context) {
     var okButton = TextButton(
       child: const Text('Awesome!'),
       onPressed: () {
         Navigator.of(context).pop();
-        print('Awesome pressed!');
       },
     );
     showDialog(
@@ -82,7 +89,8 @@ class _GamePageState extends State<GamePage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Hellow'),
-            content: Text('The slider value is ${_model.current}'),
+            content: Text('The slider value is ${_model.current}.'
+                'You Scored ${_pointsForCurrentRound()} points '),
             actions: [okButton],
             elevation: 5,
           );
