@@ -41,30 +41,40 @@ class _GamePageState extends State<GamePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Prompt(targetValue: _model.target),
-            Control(
-              model: _model,
-            ),
-            TextButton(
-              onPressed: () {
-                _showAlert(context);
-              },
-              child: const Text(
-                'Hit Me',
-                style: TextStyle(color: Colors.green),
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        image: DecorationImage(
+          image: AssetImage('images/background.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Prompt(targetValue: _model.target),
+              Control(
+                model: _model,
               ),
-            ),
-            ScoreRow(
-              totalScore: _model.totalScore,
-              round: _model.round,
-              startOverCallback: _startNewGame,
-            ),
-          ],
+              TextButton(
+                onPressed: () {
+                  _showAlert(context);
+                },
+                child: const Text(
+                  'Hit Me',
+                  style: TextStyle(color: Colors.green),
+                ),
+              ),
+              ScoreRow(
+                totalScore: _model.totalScore,
+                round: _model.round,
+                startOverCallback: _startNewGame,
+              ),
+            ],
+          ),
         ),
       ),
     );
