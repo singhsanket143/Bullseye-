@@ -62,6 +62,7 @@ class _GamePageState extends State<GamePage> {
             ScoreRow(
               totalScore: _model.totalScore,
               round: _model.round,
+              startOverCallback: _startNewGame,
             ),
           ],
         ),
@@ -97,6 +98,15 @@ class _GamePageState extends State<GamePage> {
   }
 
   int _differenceAmount() => (_model.target - _model.current).abs();
+
+  void _startNewGame() {
+    setState(() {
+      _model.current = GameModel.sliderStart;
+      _model.totalScore = GameModel.scoreStart;
+      _model.round = GameModel.roundStart;
+      _model.target = Random().nextInt(100) + 1;
+    });
+  }
 
   void _showAlert(BuildContext context) {
     var okButton = TextButton(

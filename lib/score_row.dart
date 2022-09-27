@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 
 class ScoreRow extends StatelessWidget {
-  const ScoreRow({Key? key, required this.totalScore, required this.round})
+  const ScoreRow(
+      {Key? key,
+      required this.totalScore,
+      required this.round,
+      required this.startOverCallback})
       : super(key: key);
   final int totalScore;
   final int round;
+  final VoidCallback startOverCallback;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            startOverCallback();
+          },
           child: Text('Start Over'),
         ),
         Padding(
